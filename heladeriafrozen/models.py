@@ -11,7 +11,8 @@ class Product(models.Model):
     name = models.CharField(max_length=50, verbose_name="Nombre producto")
     price = models.FloatField(verbose_name="Precio", default=0)
     stock = models.IntegerField(verbose_name="Stock", default=0)
-    image = models.ImageField(upload_to=custom_upload_to, null=True, blank=True, verbose_name="Imagen de producto")
+    #image = models.ImageField(upload_to=custom_upload_to, null=True, blank=True, verbose_name="Imagen de producto")
+    name = models.CharField(max_length=100, verbose_name="URL imagen producto")
 
     class Meta:
         verbose_name = "Producto"
