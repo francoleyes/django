@@ -21,10 +21,11 @@ class Product(models.Model):
 class Order(models.Model):
     products = models.ManyToManyField(Product)
     name_buyer = models.CharField(max_length=70, verbose_name="Nombre del comprador")
+    total = models.FloatField(verbose_name='Total', default=0)
 
     class Meta:
         verbose_name = "Orden"
-        verbose_name_plural = "Ordenes de compra"
+        verbose_name_plural = "Ordenes"
 
     def __str__(self):
         return f"Orden {self.id}"

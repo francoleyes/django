@@ -23,14 +23,16 @@ class OrderItemSerializer(serializers.ModelSerializer):
 
 class OrderSerializer(serializers.ModelSerializer):
     products = OrderItemSerializer(many=True)
+    total = serializers.FloatField(default=0)
 
     class Meta:
         model = Order
-        fields = ('products', 'name_buyer')
+        fields = ('products', 'name_buyer', 'total')
 
     def create(self, validated_data):
         products_data = validated_data.pop('products')
-        order = Order.objects.create(**validated_data)
+        total = validated_data.pop('total')
+        order = Order.objects.create(total=total, **validated_data)
 
         for product_data in products_data:
             OrderItem.objects.create(order=order, **product_data)
