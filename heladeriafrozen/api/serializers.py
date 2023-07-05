@@ -32,9 +32,10 @@ class OrderSerializer(serializers.ModelSerializer):
     def create(self, validated_data):
         products_data = validated_data.pop('products')
         total = validated_data.pop('total')
-        order = Order.objects.create(total=total, **validated_data)
+        order = self.Meta.model.objects.create(total=total, **validated_data)
 
         for product_data in products_data:
             OrderItem.objects.create(order=order, **product_data)
 
         return order
+

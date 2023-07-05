@@ -76,7 +76,6 @@ class OrderCreateAPIView(APIView):
                 discount_code.quantity -= 1
                 discount_code.save()
 
-            order = serializer.save()
             for product_data in products_data:
                 product = product_data['product']
                 quantity = product_data['quantity']
