@@ -46,9 +46,8 @@ class OrderCreateAPIView(APIView):
     def post(self, request, format=None):
         serializer = self.serializer_class(data=request.data)
         if serializer.is_valid():
-            order_data = serializer.validated_data
-            products_data = order_data.get('products')
-            discount_code = order_data.get('discount_code')
+            products_data = serializer.validated_data['products']
+            discount_code = serializer.validated_data.get('discount_code')
 
             errors = []
             for product_data in products_data:
@@ -76,10 +75,7 @@ class OrderCreateAPIView(APIView):
                 discount_code.quantity -= 1
                 discount_code.save()
 
-            for product_data in products_data:
-                product = product_data['product']
-                quantity = product_data['quantity']
-                OrderItem.objects.create(order=order, product=product, quantity=quantity)
+            order = serializer.save()
 
             return Response({'message': 'Orden de compra creada correctamente'}, status=status.HTTP_201_CREATED)
         else:
