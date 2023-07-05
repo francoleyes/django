@@ -6,7 +6,7 @@ class Product(models.Model):
     name = models.CharField(max_length=50, verbose_name="Nombre producto")
     price = models.FloatField(verbose_name="Precio", default=0)
     stock = models.IntegerField(verbose_name="Stock", default=0)
-    image = models.CharField(max_length=100, null=True, blank=True, verbose_name="URL imagen de producto")
+    url = models.CharField(max_length=100, null=True, blank=True, verbose_name="URL imagen de producto")
 
     class Meta:
         verbose_name = "Producto"
