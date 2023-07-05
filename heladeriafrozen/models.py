@@ -2,16 +2,11 @@ from django.db import models
 from django.core.exceptions import ValidationError
 from django.db.models import Q
 
-def custom_upload_to(instance, filename):
-    old_instance = Product.objects.get(pk=instance.pk)
-    old_instance.image.delete()
-    return 'products/' + filename
-
 class Product(models.Model):
     name = models.CharField(max_length=50, verbose_name="Nombre producto")
     price = models.FloatField(verbose_name="Precio", default=0)
     stock = models.IntegerField(verbose_name="Stock", default=0)
-    image = models.ImageField(upload_to=custom_upload_to, null=True, blank=True, verbose_name="Imagen de producto")
+    image = models.CharField(null=True, blank=True, verbose_name="URL imagen de producto")
 
     class Meta:
         verbose_name = "Producto"
