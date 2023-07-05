@@ -24,7 +24,7 @@ class Migration(migrations.Migration):
         ),
         migrations.AlterField(
             model_name='product',
-            name='name',
+            name='url',
             field=models.CharField(max_length=100, verbose_name='URL imagen producto'),
         ),
     ]
